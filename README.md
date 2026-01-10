@@ -1,3 +1,7 @@
+**About:**  
+This service manages employee clock-in/out events using an Asynchronous Event-Driven Architecture. By leveraging **Java,Spring Boot and Apache Kafka**, the system isolates critical user actions from unreliable third-party legacy APIs
+
+
 ## Architecture Diagram
 
 ![Architecture Diagram](./checkin-checkout_architecture.png)
