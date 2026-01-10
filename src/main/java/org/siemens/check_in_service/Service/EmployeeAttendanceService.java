@@ -1,5 +1,6 @@
 package org.siemens.check_in_service.Service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.siemens.check_in_service.Entity.EmployeeAttendance;
 import org.siemens.check_in_service.KafkaService.KafkaProducer;
@@ -16,6 +17,7 @@ public class EmployeeAttendanceService {
     private final EmployeeAttendanceRepository employeeAttendanceRepository;
     private final KafkaProducer kafkaProducer;
 
+    @Transactional(rollbackOn = Exception.class)
     public boolean processCheckInAndCheckOut(String employeeId) {
         EmployeeAttendance lastRecord = employeeAttendanceRepository
                 .findTopByEmployeeIdOrderByCheckInTimeDesc(employeeId)
