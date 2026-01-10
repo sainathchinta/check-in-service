@@ -60,7 +60,7 @@ I have separated user actions (check-in/check-out) from third-party API calls by
 - Optionally, **validate schemas** and **transform older versions** to the latest format, ensuring smooth upgrades across services.
 
 
-## Detailed Flow
+## Detailed Flow Explanation
 
 1. **User Interaction**
 
