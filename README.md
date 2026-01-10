@@ -4,7 +4,7 @@ Card readers at the factory entrance call a single REST API to record attendance
 
 The main focus of the design is to keep user interactions fast while ensuring reliability, fault tolerance, and zero loss of attendance data.
 
-## Requirements and Approach
+## Requirements
 The system provides one simple REST endpoint that accepts an `employeeId` and decides whether the action is a check-in or check-out based on the latest attendance record.  
 All working times are stored in the service database and treated as the source of truth.
 
