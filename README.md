@@ -129,6 +129,9 @@ The REST API finally sends a response to the user:
 Or an error message if something went wrong
 
 
+## Swagger UI
+
+![Swagger UI](./check-in-out-swaggerOutput.png)
 
 
 
