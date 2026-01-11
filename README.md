@@ -1,3 +1,16 @@
+## Overview
+The Check-in Service is a backend application built using **Java, Spring Boot, and Apache Kafka** to handle employee clock-in and clock-out events in a factory.  
+Card readers at the factory entrance call a single REST API to record attendance. After an employee checks out, the service calculates the worked hours and reports them to the company’s legacy labor cost recording system.
+
+The main focus of the design is to keep user interactions fast while ensuring reliability, fault tolerance, and zero loss of attendance data.
+
+## Requirements
+The system provides one simple REST endpoint that accepts an `employeeId` and decides whether the action is a check-in or check-out based on the latest attendance record.  
+All working times are stored in the service database and treated as the source of truth.
+
+Since the legacy recording system is slow and unreliable, user actions are completely separated from third-party API calls. This ensures that card readers are not blocked by network delays or retries.
+
+
 ## Architecture Diagram
 
 ![Architecture Diagram](./checkin-checkout_architecture.png)
@@ -47,7 +60,7 @@ I have separated user actions (check-in/check-out) from third-party API calls by
 - Optionally, **validate schemas** and **transform older versions** to the latest format, ensuring smooth upgrades across services.
 
 
-## Detailed Flow
+## Detailed Flow Explanation
 
 1. **User Interaction**
 
