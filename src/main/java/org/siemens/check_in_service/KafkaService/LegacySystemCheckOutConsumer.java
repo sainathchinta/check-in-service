@@ -14,14 +14,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LegacySystemCheckOutConsumer {
 
-    private final EmailService emailService;
     private final LegacyRecordingService legacyRecordingService;
     private final KafkaProducer kafkaProducer;
 
     /**
      *  Listens to the CHECK_OUT_EVENTS topic. For each check-out event:
      *   1. Calls the legacy recording system to log hours worked (with a rate limiter to avoid overwhelming the legacy API).
-     *   2. Sends an email to the employee with their worked hours.
      *
      * @param payload
      */
@@ -36,7 +34,6 @@ public class LegacySystemCheckOutConsumer {
         // A rate limiter is applied inside the LegacyRecordingService to prevent overloading the legacy API.
         // Currently configured to allow a maximum of 5 calls per defined refresh period, configurable via application.properties.
         legacyRecordingService.recordHours(payload);
-        emailService.sendHoursReport(payload);
     }
 
     @Recover

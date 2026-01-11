@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/checkin")
+@RequestMapping("/api/check-in-check-out")
 @RequiredArgsConstructor
 public class CheckInController {
 

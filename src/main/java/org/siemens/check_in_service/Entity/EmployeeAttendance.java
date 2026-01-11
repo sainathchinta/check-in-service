@@ -23,7 +23,5 @@ public class EmployeeAttendance {
 
     private LocalDateTime checkOutTime;
 
-    private boolean reported;
-
     private String emailId;
 }
