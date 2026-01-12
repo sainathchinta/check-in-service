@@ -38,11 +38,14 @@ I have separated user actions (check-in/check-out) from third-party API calls by
 
 ## 3. Suggest ways to deal with rate limits and outages of the recording system
 
-- Use **Kafka queues** to buffer incoming requests and handle high traffic efficiently.
-- Increase the number of **consumers** or scale the service horizontally (more **pods**) to process requests faster.
-- Apply **backpressure** to slow down request intake when the system is saturated.
-- **Client-side rate limiting** is another option, though it may affect the speed perceived by users.
-- Temporarily **stop sending requests** to a failing system to allow it to recover, preventing further overload and ensuring system stability.
+- Use **Kafka queues** to buffer incoming requests and absorb traffic spikes, ensuring that check-in and check-out events are not lost during peak load.
+- Increase the number of **Kafka consumers** or scale the service horizontally (more **pods**) to improve throughput and process events faster.
+- Apply **backpressure** to slow down request intake when the system is saturated, allowing the service to degrade gracefully instead of failing.
+- Use **client-side or API-level rate limiting (e.g., bucket or token-based)** to control excessive traffic, while ensuring reasonable limits to minimize user impact.
+- Temporarily **stop sending requests** to a failing or slow legacy system using a **circuit breaker**, allowing it to recover and preventing cascading failures.
+- Implement **retry with exponential backoff** when calling the recording system, reducing pressure on it during partial outages.
+- Monitor **Kafka consumer lag and error rates** to detect overload early and trigger automated scaling or throttling actions.
+- Persist all events in the database before publishing, ensuring that data can be **replayed or reprocessed** once the recording system becomes available again.
 
 ---
 
